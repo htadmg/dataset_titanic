@@ -75,7 +75,7 @@ layout = html.Div([
     ]
 )
 def prever_sobrevivencia(n_clicks, idade, sexo, classe, tarifa, siblings, parents):
-    if n_clicks == 0:
+    if n_clicks is None or n_clicks == 0:
         return ""
     entradas_usuario = pd.DataFrame({
         "Age": [idade],
