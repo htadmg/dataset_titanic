@@ -1,13 +1,12 @@
-from dash import Dash, dcc, html
+from dash import dcc, html
 from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 import joblib
 import pandas as pd
 import numpy as np
+from app import app
 
 modelo = joblib.load("modelo_titanic.pkl")
-
-app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 formulario = dbc.Container([
         dbc.Row([
@@ -62,7 +61,7 @@ formulario = dbc.Container([
         ])
 ])
 
-app.layout = html.Div([
+layout = html.Div([
     html.H1("Previsão de Sobrevivência do Titanic", className="text-center mt-5"),
     formulario,
     html.Div(id="previsao")
@@ -111,4 +110,3 @@ def prever_sobrevivencia(n_clicks, idade, sexo, classe, tarifa, siblings, parent
     alerta = dbc.Alert(msg, color=cor_alerta, className="d-flex justify-content-center mb-5")
     return alerta
 
-app.run_server(debug=True)
