@@ -20,7 +20,7 @@ formulario = dbc.Container([
                 dcc.Dropdown(id="sexo", options=[
                              {'label': 'Masculino', 'value': '1'},
                              {'label': 'Feminino', 'value': '0'},])
-            ], className="mb-3"),
+            ], className="mb-3 d-flex flex-column"),
 
             dbc.CardGroup([
                 dbc.Label("Classe do Passageiro"),
@@ -28,7 +28,7 @@ formulario = dbc.Container([
                              {'label': '1ª Classe', 'value': '1ª Classe'},
                              {'label': '2ª Classe', 'value': '2ª Classe'},
                              {'label': '3ª Classe', 'value': '3ª Classe'}])
-            ], className="mb-3"),
+            ], className="mb-3 d-flex flex-column"),
 
             dbc.CardGroup([
                 dbc.Label("Tarifa"),
