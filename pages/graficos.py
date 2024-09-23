@@ -1,6 +1,6 @@
 import pandas as pd
 import plotly.express as px
-from dash import Dash, dcc, html
+from dash import dcc, html
 
 # Carregando dataset
 url = 'https://web.stanford.edu/class/archive/cs/cs109/cs109.1166/stuff/titanic.csv'
@@ -41,26 +41,25 @@ sobrevivencia_sexo = dados.groupby("Sex")["Survived"].mean().reset_index()
 
 grafico_sexo = px.bar(sobrevivencia_sexo, x="Sex", y="Survived", title="Taxa de Sobrevivência por Sexo", labels={"Survived": "Taxa de Sobrevivência"}, text="Survived")
 
-layout = html.Div( style={"textAlign":"center"}, children=[
-    html.H1("Análise do Dataset Titanic",
-    style={"marginBottom": "40px"}),
+layout = html.Div(style={"textAlign": "center"}, children=[
+    html.H1("Análise do Dataset Titanic", style={"marginBottom": "40px"}),
 
-    html.Div(style={"display":"flex", "justifyContent":"center", "flexWrap": "wrap"}, children=[
-        html.Div(style={"width":"45%", "margin":"10px"}, children=[
+    html.Div(style={"display": "flex", "justifyContent": "center", "flexWrap": "wrap"}, children=[
+        html.Div(style={"width": "45%", "margin": "10px"}, children=[
             html.H2("Histograma de Idades"),
             dcc.Graph(figure=histograma)
         ]),
-        html.Div(style={"width":"45%", "margin":"10px"}, children=[
+        html.Div(style={"width": "45%", "margin": "10px"}, children=[
             html.H2("Boxplot de Idades"),
             dcc.Graph(figure=boxplot)
         ]),
     ]),
-    html.Div(style={"display":"flex", "justifyContent":"center", "flexWrap": "wrap"}, children=[
-        html.Div(style={"width":"45%", "margin":"10px"}, children=[
+    html.Div(style={"display": "flex", "justifyContent": "center", "flexWrap": "wrap"}, children=[
+        html.Div(style={"width": "45%", "margin": "10px"}, children=[
             html.H2("Taxa de Sobrevivência por Classe"),
             dcc.Graph(figure=grafico_classe)
         ]),
-        html.Div(style={"width":"45%", "margin":"10px"}, children=[
+        html.Div(style={"width": "45%", "margin": "10px"}, children=[
             html.H2("Taxa de Sobrevivência por Sexo"),
             dcc.Graph(figure=grafico_sexo)
         ]),

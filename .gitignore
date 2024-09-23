@@ -1,2 +1,5 @@
 /.idea
 /.venv
+__pycache__/app.cpython-312.pyc
+pages/__pycache__/formulario.cpython-312.pyc
+pages/__pycache__/graficos.cpython-312.pyc

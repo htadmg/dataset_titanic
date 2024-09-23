@@ -1,5 +1,5 @@
 from dash import dcc, html
-from dash.dependencies import Input, Output, State
+from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 from pages import graficos, formulario
 from app import app
@@ -17,10 +17,11 @@ navegacao = dbc.NavbarSimple(
 )
 
 app.layout = html.Div([
-    dcc.Location(id="url", refresh=False), 
+    dcc.Location(id="url", refresh=False),
     navegacao,
     html.Div(id="page-content")
 ])
+
 
 @app.callback(
     Output("page-content", "children"),
@@ -31,8 +32,9 @@ def abre_pagina(pathname):
         return formulario.layout
     elif pathname == "/graficos":
         return graficos.layout
-    else: 
+    else:
         return graficos.layout
-    
+
+
 if __name__ == "__main__":
     app.run_server(debug=True)

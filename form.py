@@ -16,6 +16,7 @@ app.layout = html.Div([
     html.Div(id="output-imc")
 ])
 
+
 @app.callback(
     Output("output-imc", "children"),
     Input("btn-calcular", "n_clicks"),
@@ -23,11 +24,11 @@ app.layout = html.Div([
     State("altura", "value"),
     prevent_initial_call=True
 )
-def calcula_imc(n_clicks, peso, altura): 
+def calcula_imc(n_clicks, peso, altura):
     if n_clicks == 0 or peso is None or altura is None or altura <= 0:
         return ""
-    
-    imc = peso / (altura **2)
+    imc = peso / (altura**2)
     return f"O seu IMC é: {imc:.2f}"
+
 
 app.run_server(debug=True)
