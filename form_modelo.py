@@ -5,13 +5,11 @@ import joblib
 import pandas as pd
 import numpy as np
 
-modelo = joblib.load("model_titanic.pkl")
+modelo = joblib.load("modelo_titanic.pkl")
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-formulario = html.Div([
-    html.H1("Previsão de Sobrevivência do Titanic"),
-    dbc.Container([
+formulario = dbc.Container([
         dbc.Row([
             dbc.Col([
                 dbc.CardGroup([
@@ -24,7 +22,16 @@ formulario = html.Div([
                     dcc.Dropdown(id="sexo", options=[
                         {'label': 'Masculino', 'value': '1'},
                         {'label': 'Feminino', 'value': '0'},
-                    ], placeholder="Selecione o sexo")
+                    ])
+                ], className="mb-3"),
+
+                dbc.CardGroup([
+                    dbc.Label("Classe do Passageiro"),
+                    dcc.Dropdown(id="classe", options=[
+                        {'label': '1ª Classe', 'value': '1ª Classe'},
+                        {'label': '2ª Classe', 'value': '2ª Classe'},
+                        {'label': '3ª Classe', 'value': '3ª Classe'},
+                    ])
                 ], className="mb-3"),
 
                 dbc.CardGroup([
@@ -53,7 +60,6 @@ formulario = html.Div([
             ])
 
         ])
-    ])
 ])
 
 app.layout = html.Div([
@@ -81,17 +87,17 @@ def prever_sobrevivencia(n_clicks, idade, sexo, classe, tarifa, siblings, parent
         "Age": [idade],
         "Fare": [tarifa],
         "Siblings/Spouses Aboard": [siblings if siblings is not None else 0], 
-        "parents": [parents if parents is not None else 0], 
+        "Parents/Children Aboard": [parents if parents is not None else 0], 
         "Sex_male": [1 if sexo == "Masculino" else 0],
-        "Pclass_2": [1 if classe == "2 Classe" else 0],
-        "Pclass_3": [1 if classe == "3 Classe" else 0],        
+        "Pclass_2": [1 if classe == "2ª Classe" else 0],
+        "Pclass_3": [1 if classe == "3ª Classe" else 0],        
     })
     entradas_usuario = entradas_usuario[modelo.get_booster().feature_names]
 
     #fazer previsao
 
     try: 
-        previsao = modelo.predict(entradas_usuario[0])
+        previsao = modelo.predict(entradas_usuario)[0]
     except Exception as e:
         return dbc.Alert(f"Ocorreu um erro na previão: {str(e)}", color='danger')
     
@@ -103,5 +109,6 @@ def prever_sobrevivencia(n_clicks, idade, sexo, classe, tarifa, siblings, parent
         cor_alerta = "danger"
 
     alerta = dbc.Alert(msg, color=cor_alerta, className="d-flex justify-content-center mb-5")
+    return alerta
 
 app.run_server(debug=True)
