@@ -35,3 +35,30 @@ git clone git@github.com:htadmg/dataset_titanic.git
 ```bash
 cd .\dataset_titanic
 ```
+
+2. **Crie e Ative um Ambiente Virtual (opcional, mas recomendado)**
+- **Para Linux/MacOS:**
+```bash
+python -m venv .venv
+source venv/bin/activate
+```
+ 
+- **Para Windows:**
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```   
+3. **Instale as dependências**
+```bash
+pip install -r requirements.txt
+```
+### Iniciar o Servidor de Desenvolvimento
+
+Inicie o servidor de desenvolvimento com o comando:
+
+```bash
+python .\main.py
+```
+### Acessar o Projeto
+Abra um navegador e vá para http://127.0.0.1:8050/ para ver o aplicativo em funcionamento.
+
