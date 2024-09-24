@@ -60,5 +60,5 @@ Inicie o servidor de desenvolvimento com o comando:
 python .\main.py
 ```
 ### Acessar o Projeto
-Abra um navegador e vá para http://127.0.0.1:8050/ para ver o aplicativo em funcionamento.
+Abra um navegador e vá para http://localhost::8050/ para ver o aplicativo em funcionamento.
 
